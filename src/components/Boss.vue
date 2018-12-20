@@ -23,6 +23,7 @@
     top: 5px;
     left: 20px;
 }
+
 </style>
 <template>
     <div class="layout">
@@ -66,7 +67,7 @@ export default {
     data(){
         return{
             jobcolumns: [
-                {
+                { 
                     title:'職缺',
                     key:'job',
                     render: (h, jobparams) => {
