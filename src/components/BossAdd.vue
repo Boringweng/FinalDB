@@ -2,9 +2,6 @@
 input {padding:8px 15px; background:#ccc; border:0 none;
 -webkit-border-radius: 5px;
 border-radius: 5px; }
-#data{
-    text-align: justify;
-}
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -27,9 +24,6 @@ border-radius: 5px; }
     background-color: gray;
     color: rgb(0, 0, 0);
 }
-#exp{
-    text-align: center;
-}
 .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
@@ -38,11 +32,23 @@ border-radius: 5px; }
     overflow: hidden;
 }
 .layout-nav{
-    width: 100px;
+    width: 150px;
     margin: 0 auto;
-    margin-right: 0px;
+    margin-right: 20px;
 }
 .layout-footer-center{
+    text-align: center;
+}
+.layout-logo{
+    width: 100px;
+    height: 30px;
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 5px;
+    left: 20px;
+}
+#exp{
     text-align: center;
 }
 </style>
@@ -51,6 +57,9 @@ border-radius: 5px; }
         <Layout>
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
+                    <div class="layout-logo">
+                        <font face="DFKai-sb" size="5" style="color:white"><b>求職網</b></font>
+                    </div>
                     <div class="layout-nav">
                         <MenuItem name="1">
                         <router-link to="Worker">

@@ -30,13 +30,13 @@
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                        <font face="DFKai-sb" size="3" style="color:white"><b>求職網</b></font>
+                        <font face="DFKai-sb" size="5" style="color:white"><b>求職網</b></font>
                     </div>
                     <div class="layout-nav">
                             <MenuItem name="account">
                                 <router-link to="BossAdd">
-                                    <Icon type="ios-briefcase" />
-                                    <font face="DFKai-sb" size="3"><b>新增職缺</b></font>
+                                    <Icon type="ios-briefcase" style="color:white"/>
+                                    <font face="DFKai-sb" size="3" style="color:white"><b>新增職缺</b></font>
                                 </router-link>
                             </MenuItem>
                     </div>
