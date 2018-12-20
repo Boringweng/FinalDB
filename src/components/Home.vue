@@ -1,5 +1,6 @@
 <style scoped>
 .layout {
+  style="{minHeight: '100vh'}"
   border: 1px solid #d7dde4;
   background: #f5f7f9;
   position: relative;
@@ -18,28 +19,42 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header>
-        <Menu mode="horizontal" theme="dark" active-name="1">
-          <div class="layout-nav">
-            <MenuItem name="account">
-              <Input v-model="value1" placeholder="請輸入帳號..."/>
-            </MenuItem>
-            <MenuItem name="password">
-              <Input v-model="value1" placeholder="請輸入密碼..."/>
-            </MenuItem>
-            <router-link to="Boss">
-              <MenuItem name="button">
-                <Button type="info">登入</Button>
-              </MenuItem>
-            </router-link>
-          </div>
-        </Menu>
-      </Header>
+        <Header>
+            <div class="layout-nav">
+                <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+                    <FormItem prop="user">
+                        <Input type="text" v-model="formInline.user" placeholder="Username">
+                        <Icon type="ios-person-outline" slot="prepend"></Icon>
+                        </Input>
+                    </FormItem>
+                    <FormItem prop="password">
+                        <Input type="password" v-model="formInline.password" placeholder="Password">
+                        <Icon type="ios-lock-outline" slot="prepend"></Icon>
+                        </Input>
+                    </FormItem>
+                    <router-link to="Boss">
+                        <FormItem name="button">
+                            <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+                        </FormItem>
+                    </router-link>
+                </Form>
+            </div> 
+         </Header>
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
+
+              <div>
+                    <Table highlight-row ref="currentRowTable" :columns="columns3" :data="data1"></Table>
+
+                    <br>
+
+                      <Button to="/Worker">選擇</Button>
+              </div>
+
           </Content>
+
           <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
         </Layout>
       </Layout>
@@ -48,5 +63,56 @@
 </template>
 <script>
 export default {
+
+
+ data () {
+            return {
+                columns3: [
+                    {
+                        type: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '職缺',
+                        key: 'name'
+                    },
+                    {
+                        title: '薪資',
+                        key: 'salary'
+                    },
+                    {
+                        title: '地址',
+                        key: 'address'
+                    }
+                ],
+
+                data1: [
+
+                
+                ],
+                
+                formInline: {
+                    user: '',
+                    password: ''
+                },
+                ruleInline: {
+                    user: [
+                        { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: 'Please fill in the password.', trigger: 'blur' },
+                        { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+        methods: {
+       
+
+
+        }
+
+        
 }
 </script>
