@@ -47,10 +47,10 @@
                     <br>
                     <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
                         <Row>
-                            <Col span="3">
+                            <Col span="5">
                                  <Table height="200" :columns="jobcolumns" :data="job"></Table>
                             </Col>
-                            <Col span="21">
+                            <Col span="19">
                                 <Table border :columns="workercolumns" :data="wocker"></Table>
                             </Col>
                         </Row>
@@ -65,19 +65,64 @@
 export default {
     data(){
         return{
-            jobcolumn: [
+            jobcolumns: [
                 {
                     title:'職缺',
-                    key:'job'
+                    key:'job',
+                    render: (h, jobparams) => {
+                            return h('div', [
+                                h('Icon', {
+                                    props: {
+                                        type: 'person'
+                                    }
+                                }),
+                                h('strong', jobparams.row.job)
+                            ]);
+                        }
                 },
                 {
-                    title:'動作',
-                    key:'jobaction'
-                },
+                        title: 'Action',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, jobparams) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(jobparams.jobmethod)
+                                        }
+                                    }
+                                }, 'View'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.removejob(jobparams.jobmethod)
+                                        }
+                                    }
+                                }, 'Delete')
+                            ]);
+                        }
+                }
             ],
             workercolumns: [
                     {
-                        title: 'Name',
+                       title: '求職工作',
+                        key: 'job' 
+                    },
+                    {
+                        title: '姓名',
                         key: 'name',
                         render: (h, params) => {
                             return h('div', [
@@ -91,12 +136,12 @@ export default {
                         }
                     },
                     {
-                        title: 'Age',
-                        key: 'age'
+                        title: '學歷',
+                        key: 'education'
                     },
                     {
-                        title: 'Address',
-                        key: 'address'
+                        title: '電話',
+                        key: 'phone'
                     },
                     {
                         title: 'Action',
@@ -136,40 +181,60 @@ export default {
                 ],
                 
         
-        
+        job:[
+            {
+                job:'前端工程師'
+            },
+             {
+                job:'後端工程師'
+            },
+        ],
          wocker: [
                     {
+                        job:'前端工程師',
                         name: 'John Brown',
-                        age: 18,
-                        address: 'New York No. 1 Lake Park'
+                        education: '大學',
+                        phone: 'X'
                     },
                     {
+                        job:'前端工程師',
                         name: 'Jim Green',
-                        age: 24,
-                        address: 'London No. 1 Lake Park'
+                        education: '博士',
+                        phone: 'X'
                     },
                     {
+                        job:'前端工程師',
                         name: 'Joe Black',
-                        age: 30,
-                        address: 'Sydney No. 1 Lake Park'
+                        education: '碩士',
+                        phone: 'X'
                     },
                     {
+                        job:'後端工程師',
                         name: 'Jon Snow',
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park'
+                        education: '大學',
+                        phone: 'X'
                     }
                 ]
             }
     },
     methods: {
+            // show (jobmethod) {
+            //     this.$Modal.info({
+            //         title: 'User Info',
+            //         content: 
+            //     })
+            // },
+            removejob (jobmethod) {
+                this.job.splice(jobmethod, 1);
+            },
             show (index) {
                 this.$Modal.info({
                     title: 'User Info',
-                    content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
+                    content: `Name：${this.wocker[index].name}<br>Age：${this.wocker[index].age}<br>Address：${this.wocker[index].address}`
                 })
             },
             remove (index) {
-                this.data6.splice(index, 1);
+                this.wocker.splice(index, 1);
             }
         }
 }
