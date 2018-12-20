@@ -1,25 +1,39 @@
 <style scoped>
-.layout {
-  border: 1px solid #d7dde4;
-  background: #f5f7f9;
-  position: relative;
-  border-radius: 4px;
-  overflow: hidden;
+.layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
 }
-.layout-nav {
-  width: 500px;
-  margin: 0 auto;
-  margin-right: 20px;
+.layout-nav{
+    width: 500px;
+    margin: 0 auto;
+    margin-right: 20px;
 }
-.layout-footer-center {
-  text-align: center;
+.layout-footer-center{
+    text-align: center;
+}
+.layout-logo{
+    width: 100px;
+    height: 30px;
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 5px;
+    left: 20px;
 }
 </style>
 <template>
   <div class="layout">
-    <Layout>
+    <Layout :style="{minHeight: '100vh'}">
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
+          <div class="layout-logo">
+              <router-link to="/">
+                <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
+              </router-link>
+          </div>
           <div class="layout-nav">
             <MenuItem name="account">
               <Input v-model="value1" placeholder="請輸入帳號..."/>
