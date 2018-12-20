@@ -114,7 +114,7 @@ input {
               <br>
               <br>
               <div id="button_check">
-                <router-link to="/">
+                <router-link to="/Boss">
                   <Button type="primary" class="button button1">完成</Button>
                 </router-link>
               </div>

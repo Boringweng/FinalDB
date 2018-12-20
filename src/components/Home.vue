@@ -60,12 +60,14 @@
                 <strong>{{ row.pos }}</strong>
               </template>
               <template slot-scope="{ row, index }" slot="see">
+                <router-link to="Worker">
                 <Button
                   type="primary"
                   size="small"
                   style="margin-right: 5px"
                   @click="show(index)"
                 >選擇</Button>
+                </router-link>
               </template>
             </Table>
           </Content>
