@@ -55,19 +55,17 @@
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
-            <Table border :columns="HEAD" :data="workdata">
+            <Table border :columns="HEAD" :data="data">
               <template slot-scope="{ row }" slot="pos">
                 <strong>{{ row.pos }}</strong>
               </template>
               <template slot-scope="{ row, index }" slot="see">
-                <router-link to="Worker">
                 <Button
                   type="primary"
                   size="small"
                   style="margin-right: 5px"
                   @click="show(index)"
                 >選擇</Button>
-                </router-link>
               </template>
             </Table>
           </Content>
@@ -79,8 +77,24 @@
 </template>
 <script>
 export default {
+  mounted:function(){
+    axios({
+        method: 'get',
+        url: 'http://163.13.226.86:23760/api/Job'
+    })
+    .then(function (response) {
+        if (response["status"] == "success"){
+            this.data = response["results"];           
+        }
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  },
   data() {
     return {
+      data: [],
       HEAD: [
         {
           title: "職位名稱",
@@ -101,33 +115,11 @@ export default {
           align: 'center'
         }
       ],
-      workdata: [
-        {
-          pos: "前端工程師",
-          salary: "20000~30000",
-          ability: "無能"
-        },
-        {
-          pos: "資訊安全",
-          salary: "20000~30000",
-          ability: "無能"
-        },
-        {
-          pos: "後端工程師",
-          salary:  "20000~30000",
-          ability: "以上皆是"
-        }
-      ]
     };
   },
   methods: {
     show(index) {
-      this.$Modal.info({
-        title: "User Info",
-        content: `Name：${this.data6[index].name}<br>Age：${
-          this.data6[index].age
-        }<br>Address：${this.data6[index].address}`
-      });
+      alert('確定嗎?')
     },
   }
 };

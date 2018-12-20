@@ -87,12 +87,8 @@ input {
               <font face="DFKai-sb" size="3">
                 <b>所需職位:</b>
               </font>
-              <Select v-model="model1" style="width:173px">
-                <Option
-                  v-for="item in pos"
-                  :value="item.value"
-                  :key="item.value"
-                >{{ item.label }}</Option>
+              <Select v-model="cPos" style="width:173px">
+                <Option v-for="item in pos" :value="item.value" :key="item.value">{{ item.label }}</Option>
               </Select>
               <br>
               <br>
@@ -100,14 +96,14 @@ input {
               <font face="DFKai-sb" size="3">
                 <b>薪水待遇:</b>
               </font>
-              <input type="text" placeholder="請輸入薪水待遇...">
+              <input type="text" v-model="Salary" placeholder="請輸入薪水待遇...">
               <br>
               <br>
               <br>
               <font face="DFKai-sb" size="3">
                 <b>所需技能:</b>
               </font>
-              <input type="text" placeholder="請輸入所需技能...">
+              <input type="text" v-model="cNeededSkill" placeholder="請輸入所需技能...">
               <br>
               <br>
               <br>
@@ -115,7 +111,7 @@ input {
               <br>
               <div id="button_check">
                 <router-link to="/Boss">
-                  <Button type="primary" class="button button1">完成</Button>
+                  <Button type="primary" class="button button1" @click="putwork(index)">完成</Button>
                 </router-link>
               </div>
             </div>
@@ -148,8 +144,26 @@ export default {
           label: "資料庫管理"
         }
       ],
-      model1: "",
+      cPos: "",
     };
+  },
+  methods: {
+    putwork(index) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:5000/api/Job',
+        data: {"Salary" : this.Salary,
+                "cPos" : this.cPos,
+                "cNeededSkill" : ["C", "Python"]
+              },
+        headers: {'Content-Type':'application/json'}
+      })
+      .then(function (response) {
+        if (response["status"] == "success"){
+            console.log(success);
+        }
+      })
+    }
   }
-};
+}
 </script>
