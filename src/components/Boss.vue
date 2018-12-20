@@ -87,7 +87,7 @@ export default {
           }
         },
         {
-          title: "Action",
+          title: " ",
           key: "action",
           width: 150,
           align: "center",
@@ -109,13 +109,13 @@ export default {
                     }
                   }
                 },
-                "View"
+                "查看"
               ),
               h(
                 "Button",
                 {
                   props: {
-                    type: "error",
+                    type: "warning",
                     size: "small"
                   },
                   on: {
@@ -124,7 +124,7 @@ export default {
                     }
                   }
                 },
-                "Delete"
+                "修改"
               )
             ]);
           }
@@ -154,11 +154,11 @@ export default {
           key: "education"
         },
         {
-          title: "電話",
-          key: "phone"
+          title: "Email",
+          key: "Email"
         },
         {
-          title: "Action",
+          title: " ",
           key: "action",
           width: 150,
           align: "center",
@@ -180,7 +180,7 @@ export default {
                     }
                   }
                 },
-                "View"
+                "查看"
               ),
               h(
                 "Button",
@@ -195,7 +195,7 @@ export default {
                     }
                   }
                 },
-                "Delete"
+                "刪除"
               )
             ]);
           }
@@ -215,39 +215,30 @@ export default {
           job: "前端工程師",
           name: "John Brown",
           education: "大學",
-          phone: "X"
+          Email: "X"
         },
         {
           job: "前端工程師",
           name: "Jim Green",
           education: "博士",
-          phone: "X"
+          Email: "X"
         },
         {
           job: "前端工程師",
           name: "Joe Black",
           education: "碩士",
-          phone: "X"
+          Email: "X"
         },
         {
           job: "後端工程師",
           name: "Jon Snow",
           education: "大學",
-          phone: "X"
+          Email: "X"
         }
       ]
     };
   },
   methods: {
-    // show (jobmethod) {
-    //     this.$Modal.info({
-    //         title: 'User Info',
-    //         content:
-    //     })
-    // },
-    removejob(jobmethod) {
-      this.job.splice(jobmethod, 1);
-    },
     show(index) {
       this.$Modal.info({
         title: "User Info",

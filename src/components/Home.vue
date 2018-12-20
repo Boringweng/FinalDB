@@ -55,15 +55,20 @@
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
-            <div>
-              <Table highlight-row ref="currentRowTable" :columns="columns3" :data="data1"></Table>
-
-              <br>
-
-              <Button to="/Worker">選擇</Button>
-            </div>
+            <Table border :columns="HEAD" :data="workdata">
+              <template slot-scope="{ row }" slot="pos">
+                <strong>{{ row.pos }}</strong>
+              </template>
+              <template slot-scope="{ row, index }" slot="see">
+                <Button
+                  type="primary"
+                  size="small"
+                  style="margin-right: 5px"
+                  @click="show(index)"
+                >選擇</Button>
+              </template>
+            </Table>
           </Content>
-
           <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
         </Layout>
       </Layout>
@@ -74,56 +79,54 @@
 export default {
   data() {
     return {
-      columns3: [
+      HEAD: [
         {
-          type: "index",
-          width: 60,
-          align: "center"
+          title: "職位名稱",
+          slot: "pos"
         },
         {
-          title: "職缺",
-          key: "name"
-        },
-        {
-          title: "薪資",
+          title: "薪水待遇",
           key: "salary"
         },
         {
-          title: "地址",
-          key: "address"
+          title: "所需技能",
+          key: "ability"
+        },
+        {
+          title: " ",
+          slot: "see",
+          width: 150,
+          align: 'center'
         }
       ],
-
-      data1: [],
-
-      formInline: {
-        user: "",
-        password: ""
-      },
-      ruleInline: {
-        user: [
-          {
-            required: true,
-            message: "Please fill in the user name",
-            trigger: "blur"
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: "Please fill in the password.",
-            trigger: "blur"
-          },
-          {
-            type: "string",
-            min: 6,
-            message: "The password length cannot be less than 6 bits",
-            trigger: "blur"
-          }
-        ]
-      }
+      workdata: [
+        {
+          pos: "前端工程師",
+          salary: "20000~30000",
+          ability: "無能"
+        },
+        {
+          pos: "資訊安全",
+          salary: "20000~30000",
+          ability: "無能"
+        },
+        {
+          pos: "後端工程師",
+          salary:  "20000~30000",
+          ability: "以上皆是"
+        }
+      ]
     };
   },
-  methods: {}
+  methods: {
+    show(index) {
+      this.$Modal.info({
+        title: "User Info",
+        content: `Name：${this.data6[index].name}<br>Age：${
+          this.data6[index].age
+        }<br>Address：${this.data6[index].address}`
+      });
+    },
+  }
 };
 </script>
