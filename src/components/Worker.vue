@@ -53,9 +53,9 @@
 // window.expinput = new MyPartial({
 //   template: '#expinput'
 // });
-window.expinput = Vue.component('modal', {
-  template: '#expinput'
-})
+// window.expinput = Vue.component('modal', {
+//   template: '#expinput'
+// })
 export default{
     data () {
       return {
