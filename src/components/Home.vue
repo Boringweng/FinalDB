@@ -53,7 +53,17 @@
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
+
+              <div>
+                    <Table highlight-row ref="currentRowTable" :columns="columns3" :data="data1"></Table>
+
+                    <br>
+
+                      <Button to="/Worker">選擇</Button>
+              </div>
+
           </Content>
+
           <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
         </Layout>
       </Layout>
@@ -62,5 +72,56 @@
 </template>
 <script>
 export default {
+
+
+ data () {
+            return {
+                columns3: [
+                    {
+                        type: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '職缺',
+                        key: 'name'
+                    },
+                    {
+                        title: '薪資',
+                        key: 'salary'
+                    },
+                    {
+                        title: '地址',
+                        key: 'address'
+                    }
+                ],
+
+                data1: [
+
+                
+                ],
+                
+                formInline: {
+                    user: '',
+                    password: ''
+                },
+                ruleInline: {
+                    user: [
+                        { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: 'Please fill in the password.', trigger: 'blur' },
+                        { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+        methods: {
+       
+
+
+        }
+
+        
 }
 </script>
