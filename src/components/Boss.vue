@@ -23,6 +23,7 @@
     top: 5px;
     left: 20px;
 }
+
 </style>
 <template>
     <div class="layout">
@@ -30,7 +31,7 @@
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                        <font face="DFKai-sb" size="5" style="color:white"><b>求職網</b></font>
+                        <font face="DFKai-sb" size="6" style="color:white"><b>求職網</b></font>
                     </div>
                     <div class="layout-nav">
                             <MenuItem name="account">
@@ -66,7 +67,7 @@ export default {
     data(){
         return{
             jobcolumns: [
-                {
+                { 
                     title:'職缺',
                     key:'job',
                     render: (h, jobparams) => {
