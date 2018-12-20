@@ -1,11 +1,10 @@
 <style scoped>
-.layout {
-  style="{minHeight: '100vh'}"
-  border: 1px solid #d7dde4;
-  background: #f5f7f9;
-  position: relative;
-  border-radius: 4px;
-  overflow: hidden;
+.layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
 }
 .layout-nav{
     width: 500px;
@@ -28,27 +27,28 @@
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
-        <Header>
-            <div class="layout-nav">
-                <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                    <FormItem prop="user">
-                        <Input type="text" v-model="formInline.user" placeholder="Username">
-                        <Icon type="ios-person-outline" slot="prepend"></Icon>
-                        </Input>
-                    </FormItem>
-                    <FormItem prop="password">
-                        <Input type="password" v-model="formInline.password" placeholder="Password">
-                        <Icon type="ios-lock-outline" slot="prepend"></Icon>
-                        </Input>
-                    </FormItem>
-                    <router-link to="Boss">
-                        <FormItem name="button">
-                            <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
-                        </FormItem>
-                    </router-link>
-                </Form>
-            </div> 
-         </Header>
+      <Header>
+        <Menu mode="horizontal" theme="dark" active-name="1">
+          <div class="layout-logo">
+              <router-link to="/">
+                <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
+              </router-link>
+          </div>
+          <div class="layout-nav">
+            <MenuItem name="account">
+              <Input v-model="value1" placeholder="請輸入帳號..."/>
+            </MenuItem>
+            <MenuItem name="password">
+              <Input v-model="value1" placeholder="請輸入密碼..."/>
+            </MenuItem>
+            <router-link to="Boss">
+              <MenuItem name="button">
+                <Button type="info">登入</Button>
+              </MenuItem>
+            </router-link>
+          </div>
+        </Menu>
+      </Header>
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
