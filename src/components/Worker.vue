@@ -1,14 +1,18 @@
 <template>
      <div class="layout">
-        <Layout :style="{minHeight: '100vh'}">
+        <Layout>
             <Header :style="{position: 'fixed', width: '100%'}">
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                        <router-link to="/">
-                            <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
-                        </router-link>
+                        <font face="DFKai-sb" size="5" style="color:white"><b>求職網</b></font>
                     </div>
                     <div class="layout-nav">
+                        <MenuItem name="1">
+                            <router-link to="/">
+                                <Icon type="md-close" style="color:white"></Icon>
+                                <font face="DFKai-sb" size="3" style="color:white"><b>取消</b></font>
+                            </router-link>
+                        </MenuItem>
                     </div>
                 </Menu>
             </Header>
@@ -36,7 +40,7 @@
                     </template>
                     <div id="button_check">
                         <router-link to="/">
-                            <Button type="primary" class="button button1">完成</Button>
+                            <button class="button button1"><font face="DFKai-sb" size="4">完成</font></button>
                         </router-link>
                     </div>
                 </div>
@@ -48,6 +52,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.common.dev.js"></script>
 
 <script>
+// var MyPartial = Vue.extend({});
+// window.expinput = new MyPartial({
+//   template: '#expinput'
+// });
+// window.expinput = Vue.component('modal', {
+//   template: '#expinput'
+// })
 export default{
     data () {
       return {
@@ -91,11 +102,20 @@ border-radius: 5px; }
     cursor: pointer;
 }
 .button1 {
-    background-color: rgb(108, 197, 218);
+    background-color: #4CAF50;
     color: black;
-    border: 2px solid rgb(108, 197, 218);
+    border: 2px solid #4CAF50;
 }
 .button1:hover {
+    background-color: gray;
+    color: rgb(0, 0, 0);
+}
+.button2 {
+    background-color: #4CAF50;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+.button2:hover {
     background-color: gray;
     color: rgb(0, 0, 0);
 }
