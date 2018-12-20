@@ -4,15 +4,11 @@
             <Header :style="{position: 'fixed', width: '100%'}">
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                        <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
+                        <router-link to="/">
+                            <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
+                        </router-link>
                     </div>
                     <div class="layout-nav">
-                        <MenuItem name="1">
-                            <router-link to="/">
-                                <Icon type="md-close" style="color:white"></Icon>
-                                <font face="DFKai-sb" size="3" style="color:white"><b>取消</b></font>
-                            </router-link>
-                        </MenuItem>
                     </div>
                 </Menu>
             </Header>
