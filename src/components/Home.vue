@@ -18,7 +18,7 @@
 </style>
 <template>
   <div class="layout">
-    <Layout>
+    <Layout :style="{minHeight: '100vh'}">
         <Header>
             <div class="layout-nav">
                 <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
