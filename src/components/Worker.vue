@@ -1,35 +1,33 @@
 <template>
      <div class="layout">
-        <Layout>
+        <Layout :style="{minHeight: '100vh'}">
             <Header :style="{position: 'fixed', width: '100%'}">
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                        <font face="DFKai-sb" size="5" style="color:white"><b>求職網</b></font>
+                        <router-link to="/">
+                            <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
+                        </router-link>
                     </div>
                     <div class="layout-nav">
-                        <MenuItem name="1">
-                            <router-link to="/">
-                                <Icon type="md-close" style="color:white"></Icon>
-                                <font face="DFKai-sb" size="3" style="color:white"><b>取消</b></font>
-                            </router-link>
-                        </MenuItem>
                     </div>
                 </Menu>
             </Header>
             <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
                 <div id="exp">
                     <font face="DFKai-sb" size="5">基本資料</font><br><br>
-                    <font face="DFKai-sb" size="3"><b>身分證字號:</b></font> <input type="text" placeholder="請輸入身分證ID..."><br><br>
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>姓名:</b></font> <input type="text" placeholder="請輸入姓名..."><br><br>
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>E-mail:</b></font> <input type="text" placeholder="請輸入E-mail..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>身分證ID:</b></font> <input type="text" placeholder="請輸入身分證ID..."><br><br>
                     <font face="DFKai-sb" size="3"><b>期望薪水:</b></font> <input type="text" placeholder="請輸入期望薪水..."><br><br>
-                    <font face="DFKai-sb" size="3"><b>申請部門:</b></font> <input type="text" placeholder="請輸入所申請部門..."><br><br>
-                    <font face="DFKai-sb" size="3"><b>技能:</b></font> <input type="text" placeholder="請輸入技能..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>專長技能:</b></font> <input type="text" placeholder="請輸入專長技能..."><br><br>
                     <hr>
                     <font face="DFKai-sb" size="5">學歷</font><br><br>
-                    <font face="DFKai-sb" size="3"><b>學位:</b></font> <input type="text" placeholder="請輸入最高學位..."><br><br>
-                    <font face="DFKai-sb" size="3"><b>學校:</b></font> <input type="text" placeholder="請輸入其學校..."><br><br>
-                    <font face="DFKai-sb" size="3"><b>系所:</b></font> <input type="text" placeholder="請輸入其系所..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>最高學位:</b></font> <input type="text" placeholder="請輸入最高學位..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>畢業學校:</b></font> <input type="text" placeholder="請輸入其學校..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>畢業系所:</b></font> <input type="text" placeholder="請輸入其系所..."><br><br>
                     <hr>
                     <font face="DFKai-sb" size="5">工作經驗</font><br><br>
+                    <Icon type="md-add" />
                     <input type="button" value="新增" v-on:click="addbox" id="add"><br><br>
                     <template id="expinput">
                         <div v-for="(line, index) in lines" v-bind:key="index">
@@ -40,9 +38,10 @@
                     </template>
                     <div id="button_check">
                         <router-link to="/">
-                            <button class="button button1"><font face="DFKai-sb" size="4">完成</font></button>
+                            <Button type="primary" class="button button1">完成</Button>
                         </router-link>
                     </div>
+                    </br>
                 </div>
             </Content>
             <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
@@ -52,13 +51,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.common.dev.js"></script>
 
 <script>
-// var MyPartial = Vue.extend({});
-// window.expinput = new MyPartial({
-//   template: '#expinput'
-// });
-// window.expinput = Vue.component('modal', {
-//   template: '#expinput'
-// })
 export default{
     data () {
       return {
@@ -102,20 +94,11 @@ border-radius: 5px; }
     cursor: pointer;
 }
 .button1 {
-    background-color: #4CAF50;
+    background-color: rgb(108, 197, 218);
     color: black;
-    border: 2px solid #4CAF50;
+    border: 2px solid rgb(108, 197, 218);
 }
 .button1:hover {
-    background-color: gray;
-    color: rgb(0, 0, 0);
-}
-.button2 {
-    background-color: #4CAF50;
-    color: black;
-    border: 2px solid #4CAF50;
-}
-.button2:hover {
     background-color: gray;
     color: rgb(0, 0, 0);
 }
