@@ -55,9 +55,19 @@
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
-            <Table border :columns="HEAD" :data="data">
-              <template slot-scope="{ row }" slot="pos">
-                <strong>{{ row.pos }}</strong>
+            <Table border :columns="HEAD" :data="jobs">
+              <template slot-scope="{ row, index }" slot="cPos">
+                <strong>{{ row.cPos }}</strong>
+              </template>
+              <template slot-scope="{ row, index }" slot="Salary">
+                <strong>{{ row.Salary }}</strong>
+              </template>
+              <template slot-scope="{ row, index }" slot="cNeededSkill">
+                <strong v-for="(item, index) in row.cNeededSkill" :value="item.value" v-bind:key="index">
+                  {{ item }} 
+                  <strong v-if="index != row.cNeededSkill.length-1">,</strong>
+                </strong>
+                <!-- <strong>{{ row.cNeededSkill }}</strong> -->
               </template>
               <template slot-scope="{ row, index }" slot="see">
                 <Button
@@ -77,36 +87,22 @@
 </template>
 <script>
 export default {
-  mounted:function(){
-    axios({
-        method: 'get',
-        url: 'http://163.13.226.86:23760/api/Job'
-    })
-    .then(function (response) {
-        if (response["status"] == "success"){
-            this.data = response["results"];           
-        }
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-  },
   data() {
     return {
-      data: [],
+      test: 123,
+      jobs: [],
       HEAD: [
         {
           title: "職位名稱",
-          slot: "pos"
+          slot: "cPos"
         },
         {
           title: "薪水待遇",
-          key: "salary"
+          slot: "Salary"
         },
         {
           title: "所需技能",
-          key: "ability"
+          slot: "cNeededSkill"
         },
         {
           title: " ",
@@ -117,10 +113,25 @@ export default {
       ],
     };
   },
+  created(){
+    var self = this;
+    const axios = require('axios');
+    axios.get(
+      'http://163.13.226.86:23760/api/Job'
+    )
+    .then(function (response) {
+        if (response.data["status"] == "success"){
+          self.jobs = response.data["results"];
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  },
   methods: {
     show(index) {
       alert('確定嗎?')
-    },
+    }
   }
 };
 </script>

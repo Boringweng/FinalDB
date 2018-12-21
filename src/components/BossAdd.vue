@@ -1,8 +1,10 @@
 <style scoped>
 input {
   padding: 8px 15px;
-  background: #ccc;
-  border: 0 none;
+  background: white;
+  border: 1px;
+  border-style: solid;
+  border-color:rgb(221, 209, 209) ;
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
@@ -96,14 +98,24 @@ input {
               <font face="DFKai-sb" size="3">
                 <b>薪水待遇:</b>
               </font>
-              <input type="text" v-model="Salary" placeholder="請輸入薪水待遇...">
+              <input type="text"  v-model="Salary" placeholder="請輸入薪水待遇...">
               <br>
               <br>
               <br>
-              <font face="DFKai-sb" size="3">
-                <b>所需技能:</b>
-              </font>
-              <input type="text" v-model="cNeededSkill" placeholder="請輸入所需技能...">
+              <template id="expinput"> 
+                <div v-for="(sk, index) in cNeededSkill" v-bind:key="index">
+                    <font face="DFKai-sb" size="3">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>技能:</b>
+                    </font>
+                    <Select v-model="cNeededSkill[index]" style="width:173px">
+                      <Option v-for="item in Skill" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    </Select>
+                    <input type="button" value="刪除技能" v-on:click="delbox(index)" id="del"><br><br>
+                    <br>
+                </div>
+                <br><br>
+                <input type="button" value="新增技能" v-on:click="addbox" id="add"><br><br>
+              </template>
               <br>
               <br>
               <br>
@@ -111,7 +123,7 @@ input {
               <br>
               <div id="button_check">
                 <router-link to="/Boss">
-                  <Button type="primary" class="button button1" @click="putwork(index)">完成</Button>
+                  <Button type="primary" class="button button1" @click="putwork()">完成</Button>
                 </router-link>
               </div>
             </div>
@@ -126,6 +138,10 @@ input {
 export default {
   data() {
     return {
+      lines: [],
+      Salary: null,
+      cPos: null,
+      cNeededSkill: [],
       pos: [
         {
           value: "前端工程師",
@@ -144,26 +160,71 @@ export default {
           label: "資料庫管理"
         }
       ],
-      cPos: "",
+      Skill: [
+        {
+          value: "C++",
+          label: "C++"
+        },
+        {
+          value: "Javascript",
+          label: "Javascript"
+        },
+        {
+          value: "Html",
+          label: "Html"
+        },
+        {
+          value: "Python",
+          label: "Python"
+        },
+        {
+          value:"Nodejs",
+          label:"Nodejs"
+        },
+        {
+          value:"C#",
+          label:"C#"
+        }
+      ],
+      cPos: ""
     };
   },
   methods: {
-    putwork(index) {
-      axios({
-        method: 'post',
-        url: 'http://localhost:5000/api/Job',
-        data: {"Salary" : this.Salary,
-                "cPos" : this.cPos,
-                "cNeededSkill" : ["C", "Python"]
-              },
-        headers: {'Content-Type':'application/json'}
-      })
-      .then(function (response) {
-        if (response["status"] == "success"){
-            console.log(success);
+    putwork() {
+      const axios = require('axios');
+      axios.post(
+        "http://163.13.226.86:23760/api/Job",
+        {
+          "Salary" : this.Salary,
+          "cPos" : this.cPos,
+          "cNeededSkill" : this.cNeededSkill
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+            
+
+          }
         }
+      )
+      .then(function(response) {
+        console.log(success);
       })
-    }
+      .catch(function(error) {
+        console.log(error);
+      });
+    },
+    addbox(){
+            this.cNeededSkill.push(null)
+            
+    },
+    delbox(index){
+           this.cNeededSkill.splice(index) 
+        }
+    },
+
+  mounted () {
+      this.addbox()
   }
-}
+};
 </script>
