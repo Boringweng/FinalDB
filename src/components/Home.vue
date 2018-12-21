@@ -1,27 +1,27 @@
 <style scoped>
-.layout{
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
+.layout {
+  border: 1px solid #d7dde4;
+  background: #f5f7f9;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
 }
-.layout-nav{
-    width: 500px;
-    margin: 0 auto;
-    margin-right: 20px;
+.layout-nav {
+  width: 500px;
+  margin: 0 auto;
+  margin-right: 20px;
 }
-.layout-footer-center{
-    text-align: center;
+.layout-footer-center {
+  text-align: center;
 }
-.layout-logo{
-    width: 100px;
-    height: 30px;
-    border-radius: 3px;
-    float: left;
-    position: relative;
-    top: 5px;
-    left: 20px;
+.layout-logo {
+  width: 100px;
+  height: 30px;
+  border-radius: 3px;
+  float: left;
+  position: relative;
+  top: 5px;
+  left: 20px;
 }
 </style>
 <template>
@@ -30,9 +30,11 @@
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
-              <router-link to="/">
-                <font face="DFKai-sb" size="6" style="color:yellow"><b>求職網</b></font>
-              </router-link>
+            <router-link to="/">
+              <font face="DFKai-sb" size="6" style="color:yellow">
+                <b>求職網</b>
+              </font>
+            </router-link>
           </div>
           <div class="layout-nav">
             <MenuItem name="account">
@@ -53,17 +55,20 @@
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
-
-              <div>
-                    <Table highlight-row ref="currentRowTable" :columns="columns3" :data="data1"></Table>
-
-                    <br>
-
-                      <Button to="/Worker">選擇</Button>
-              </div>
-
+            <Table border :columns="HEAD" :data="data">
+              <template slot-scope="{ row }" slot="pos">
+                <strong>{{ row.pos }}</strong>
+              </template>
+              <template slot-scope="{ row, index }" slot="see">
+                <Button
+                  type="primary"
+                  size="small"
+                  style="margin-right: 5px"
+                  @click="show(index)"
+                >選擇</Button>
+              </template>
+            </Table>
           </Content>
-
           <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
         </Layout>
       </Layout>
@@ -72,56 +77,50 @@
 </template>
 <script>
 export default {
-
-
- data () {
-            return {
-                columns3: [
-                    {
-                        type: 'index',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
-                        title: '職缺',
-                        key: 'name'
-                    },
-                    {
-                        title: '薪資',
-                        key: 'salary'
-                    },
-                    {
-                        title: '地址',
-                        key: 'address'
-                    }
-                ],
-
-                data1: [
-
-                
-                ],
-                
-                formInline: {
-                    user: '',
-                    password: ''
-                },
-                ruleInline: {
-                    user: [
-                        { required: true, message: 'Please fill in the user name', trigger: 'blur' }
-                    ],
-                    password: [
-                        { required: true, message: 'Please fill in the password.', trigger: 'blur' },
-                        { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
-                    ]
-                }
-            }
-        },
-        methods: {
-       
-
-
+  mounted:function(){
+    axios({
+        method: 'get',
+        url: 'http://163.13.226.86:23760/api/Job'
+    })
+    .then(function (response) {
+        if (response["status"] == "success"){
+            this.data = response["results"];           
         }
-
-        
-}
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  },
+  data() {
+    return {
+      data: [],
+      HEAD: [
+        {
+          title: "職位名稱",
+          slot: "pos"
+        },
+        {
+          title: "薪水待遇",
+          key: "salary"
+        },
+        {
+          title: "所需技能",
+          key: "ability"
+        },
+        {
+          title: " ",
+          slot: "see",
+          width: 150,
+          align: 'center'
+        }
+      ],
+    };
+  },
+  methods: {
+    show(index) {
+      alert('確定嗎?')
+    },
+  }
+};
 </script>

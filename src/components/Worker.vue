@@ -15,9 +15,10 @@
             <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
                 <div id="exp">
                     <font face="DFKai-sb" size="5">基本資料</font><br><br>
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>姓名:</b></font> <input type="text" placeholder="請輸入姓名..."><br><br>
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>E-mail:</b></font> <input type="text" placeholder="請輸入E-mail..."><br><br>
                     <font face="DFKai-sb" size="3"><b>身分證ID:</b></font> <input type="text" placeholder="請輸入身分證ID..."><br><br>
                     <font face="DFKai-sb" size="3"><b>期望薪水:</b></font> <input type="text" placeholder="請輸入期望薪水..."><br><br>
-                    <font face="DFKai-sb" size="3"><b>申請部門:</b></font> <input type="text" placeholder="請輸入所申請部門..."><br><br>
                     <font face="DFKai-sb" size="3"><b>專長技能:</b></font> <input type="text" placeholder="請輸入專長技能..."><br><br>
                     <hr>
                     <font face="DFKai-sb" size="5">學歷</font><br><br>
@@ -26,6 +27,7 @@
                     <font face="DFKai-sb" size="3"><b>系所:</b></font> <input type="text" placeholder="請輸入其系所..."><br><br>
                     <hr>
                     <font face="DFKai-sb" size="5">工作經驗</font><br><br>
+                    <Icon type="md-add" />
                     <input type="button" value="新增" v-on:click="addbox" id="add"><br><br>
                     <template id="expinput">
                         <div v-for="(line, index) in lines" v-bind:key="index">
