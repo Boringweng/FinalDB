@@ -54,10 +54,39 @@
           <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
             <Row>
               <Col span="5">
-                <Table height="200" :columns="jobcolumns" :data="job"></Table>
+                <Table height="200" :columns="BOSSSEND" :data="jobs">
+                  <template slot-scope="{ row, index }" slot="cPos">
+                    <strong>{{ row.cPos}}</strong>
+                  </template>
+                  <template slot-scope="{ row, index }" slot="see">
+                    <Button type="primary" size="small" style="margin-right: 5px">檢視</Button>
+                    <Button type="warning" size="small" style="margin-right: 5px">修改</Button>
+                  </template>
+                </Table>
               </Col>
               <Col span="19">
-                <Table border :columns="workercolumns" :data="wocker"></Table>
+                <Table border :columns="HEAD" :data="jobseeker">
+                  <template slot-scope="{ row, index }" slot="sName">
+                    <strong>{{ row.sName}}</strong>
+                  </template>
+                  <template slot-scope="{ row, index }" slot="sName">
+                    <strong>{{ row.sName }}</strong>
+                  </template>
+                  <template slot-scope="{ row, index }" slot="sEmail">
+                    <strong>{{ row.sEmail }}</strong>
+                  </template>
+                  <template slot-scope="{ row, index }" slot="see">
+                    <router-link :to="{name:'WORKERINFO',params:{id: row.id}}">
+                      <Button type="primary" size="small" style="margin-right: 5px" @click="view(index)">檢視</Button>
+                    </router-link>
+                      <Button
+                        type="error"
+                        size="small"
+                        style="margin-right: 5px"
+                        @click="del(row.id)"
+                      >刪除</Button>
+                  </template>
+                </Table>
               </Col>
             </Row>
           </Content>
@@ -71,185 +100,90 @@
 export default {
   data() {
     return {
-      jobcolumns: [
+      jobseeker: [],
+      jobs: [],
+      BOSSSEND: [
         {
-          title: "職缺",
-          key: "job",
-          render: (h, jobparams) => {
-            return h("div", [
-              h("Icon", {
-                props: {
-                  type: "person"
-                }
-              }),
-              h("strong", jobparams.row.job)
-            ]);
-          }
+          title: "職位",
+          slot: "cPos"
         },
         {
           title: " ",
-          key: "action",
+          slot: "see",
           width: 150,
-          align: "center",
-          render: (h, jobparams) => {
-            return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "5px"
-                  },
-                  on: {
-                    click: () => {
-                      this.show(jobparams.jobmethod);
-                    }
-                  }
-                },
-                "查看"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "warning",
-                    size: "small"
-                  },
-                  on: {
-                    click: () => {
-                      this.removejob(jobparams.jobmethod);
-                    }
-                  }
-                },
-                "修改"
-              )
-            ]);
-          }
+          align: "center"
         }
       ],
-      workercolumns: [
+      HEAD: [
         {
           title: "求職工作",
-          key: "job"
+          slot: "cPos"
         },
         {
           title: "姓名",
-          key: "name",
-          render: (h, params) => {
-            return h("div", [
-              h("Icon", {
-                props: {
-                  type: "person"
-                }
-              }),
-              h("strong", params.row.name)
-            ]);
-          }
-        },
-        {
-          title: "學歷",
-          key: "education"
+          slot: "sName"
         },
         {
           title: "Email",
-          key: "Email"
+          slot: "sEmail"
         },
         {
           title: " ",
-          key: "action",
+          slot: "see",
           width: 150,
-          align: "center",
-          render: (h, params) => {
-            return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "5px"
-                  },
-                  on: {
-                    click: () => {
-                      this.show(params.index);
-                    }
-                  }
-                },
-                "查看"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "error",
-                    size: "small"
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params.index);
-                    }
-                  }
-                },
-                "刪除"
-              )
-            ]);
-          }
-        }
-      ],
-
-      job: [
-        {
-          job: "前端工程師"
-        },
-        {
-          job: "後端工程師"
-        }
-      ],
-      wocker: [
-        {
-          job: "前端工程師",
-          name: "John Brown",
-          education: "大學",
-          Email: "X"
-        },
-        {
-          job: "前端工程師",
-          name: "Jim Green",
-          education: "博士",
-          Email: "X"
-        },
-        {
-          job: "前端工程師",
-          name: "Joe Black",
-          education: "碩士",
-          Email: "X"
-        },
-        {
-          job: "後端工程師",
-          name: "Jon Snow",
-          education: "大學",
-          Email: "X"
+          align: "center"
         }
       ]
     };
   },
-  methods: {
-    show(index) {
-      this.$Modal.info({
-        title: "User Info",
-        content: `Name：${this.wocker[index].name}<br>Age：${
-          this.wocker[index].age
-        }<br>Address：${this.wocker[index].address}`
+  mounted() {
+    var self = this;
+    const axios = require("axios");
+    axios
+      .get("http://163.13.226.86:23760/api/Jobseeker")
+      .then(function(response) {
+        if (response.data["status"] == "success") {
+          self.jobseeker = response.data["results"];
+
+          self.addjob();
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
       });
+  },
+  methods: {
+    del(row) {
+      const axios = require("axios");
+      axios
+        .delete("http://163.13.226.86:23760/api/Jobseeker/" + row)
+        .then(response => {
+          this.jobseeker.splice(row, row + 1);
+        });
+      console.log(error);
     },
-    remove(index) {
-      this.wocker.splice(index, 1);
-    }
+    addjob() {
+      const Vue = require("Vue");
+      const self = this;
+      const axios = require("axios");
+      axios
+        .get("http://163.13.226.86:23760/api/Job")
+        .then(function(response) {
+          if (response.data["status"] == "success") {
+            self.jobs = response.data["results"];
+            for (var i = 0; i < self.jobs.length; i++) {
+              for (var j = 0; j < self.jobseeker.length; j++) {
+                if (self.jobseeker[j]["JobID"] == self.jobs[i]["id"]) {
+                  self.jobseeker[j]["cPos"] = self.jobs[i]["cPos"];
+                }
+              }
+            }
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   }
 };
 </script>

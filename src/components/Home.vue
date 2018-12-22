@@ -63,19 +63,23 @@
                 <strong>{{ row.Salary }}</strong>
               </template>
               <template slot-scope="{ row, index }" slot="cNeededSkill">
-                <strong v-for="(item, index) in row.cNeededSkill" :value="item.value" v-bind:key="index">
-                  {{ item }} 
+                <strong
+                  v-for="(item, index) in row.cNeededSkill"
+                  :value="item.value"
+                  v-bind:key="index"
+                >
+                  {{ item }}
                   <strong v-if="index != row.cNeededSkill.length-1">,</strong>
                 </strong>
-                <!-- <strong>{{ row.cNeededSkill }}</strong> -->
               </template>
               <template slot-scope="{ row, index }" slot="see">
-                <Button
+                <router-link :to="{name:'WORKER',params:{id:index + 1}}">
+                <Button 
                   type="primary"
                   size="small"
                   style="margin-right: 5px"
-                  @click="show(index)"
                 >選擇</Button>
+                </router-link>
               </template>
             </Table>
           </Content>
@@ -89,7 +93,6 @@
 export default {
   data() {
     return {
-      test: 123,
       jobs: [],
       HEAD: [
         {
@@ -108,30 +111,24 @@ export default {
           title: " ",
           slot: "see",
           width: 150,
-          align: 'center'
+          align: "center"
         }
-      ],
+      ]
     };
   },
-  created(){
+  created() {
     var self = this;
-    const axios = require('axios');
-    axios.get(
-      'http://163.13.226.86:23760/api/Job'
-    )
-    .then(function (response) {
-        if (response.data["status"] == "success"){
+    const axios = require("axios");
+    axios
+      .get("http://163.13.226.86:23760/api/Job")
+      .then(function(response) {
+        if (response.data["status"] == "success") {
           self.jobs = response.data["results"];
         }
-    })
-    .catch(function (error) {
+      })
+      .catch(function(error) {
         console.log(error);
-    });
-  },
-  methods: {
-    show(index) {
-      alert('確定嗎?')
-    }
+      });
   }
 };
 </script>

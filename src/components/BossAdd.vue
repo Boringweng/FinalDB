@@ -104,9 +104,11 @@ input {
               <br>
               <template id="expinput"> 
                 <div v-for="(sk, index) in cNeededSkill" v-bind:key="index">
-                    <font face="DFKai-sb" size="3">
+                    
+                    <font v-if="index==0" face="DFKai-sb" size="3">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>技能:</b>
                     </font>
+                    <font v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
                     <Select v-model="cNeededSkill[index]" style="width:173px">
                       <Option v-for="item in Skill" :value="item.value" :key="item.value">{{ item.label }}</Option>
                     </Select>
@@ -219,7 +221,7 @@ export default {
             
     },
     delbox(index){
-           this.cNeededSkill.splice(index) 
+           this.cNeededSkill.splice(index, index + 1) 
         }
     },
 

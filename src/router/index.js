@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import BOSSADD from '@/components/BossAdd'
 import WORKER from '@/components/Worker'
 import BOSS from '@/components/Boss'
+import WORKERINFO from '@/components/Workerinfo'
 
 Vue.use(Router)
 
@@ -15,9 +16,19 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Worker',
+      path: '/Home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/Worker/:id',
       name: 'WORKER',
       component: WORKER
+    },
+    {
+      path: '/Workerinfo/:id',
+      name: 'WORKERINFO',
+      component: WORKERINFO
     },
     {
       path: '/BossAdd',
