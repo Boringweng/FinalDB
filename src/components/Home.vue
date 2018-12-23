@@ -23,10 +23,17 @@
   top: 5px;
   left: 20px;
 }
+.layout-header{
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index:10;
+}
 </style>
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
+    <div class="layout-header">
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -51,6 +58,9 @@
           </div>
         </Menu>
       </Header>
+      </div>
+      </br>
+      </br>
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
