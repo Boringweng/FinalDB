@@ -70,7 +70,9 @@ input {
               </font>
             </router-link>
           </div>
-          <div class="layout-nav"></div>
+          <div class="layout-nav">
+             
+          </div>
         </Menu>
       </Header>
       <Layout>
@@ -124,6 +126,9 @@ input {
               <br>
               <br>
               <div id="button_check">
+                <router-link to="Boss">
+                  <Button type="primary" class="button button1">取消</Button>
+                </router-link>
                 <router-link to="/Boss">
                   <Button type="primary" class="button button1" @click="putwork()">完成</Button>
                 </router-link>
