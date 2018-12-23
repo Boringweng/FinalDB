@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
+    <div class="layout-header">
       <Header :style="{position: 'fixed', width: '100%'}">
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -12,6 +13,7 @@
           </div>
         </Menu>
       </Header>
+      </div>
       <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
         <div id="title">
         <font face="DFKai-sb" size="8"><b>求職者資訊</b><br></font>
@@ -112,5 +114,11 @@ export default {
   position: relative;
   top: 5px;
   left: 20px;
+}
+.layout-header{
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index:10;
 }
 </style>

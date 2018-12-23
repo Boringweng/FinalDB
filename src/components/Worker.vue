@@ -1,6 +1,7 @@
 <template>
      <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
+        <div class="layout-header">
             <Header :style="{position: 'fixed', width: '100%'}">
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
@@ -12,6 +13,7 @@
                     </div>
                 </Menu>
             </Header>
+            </div>
             <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
                 <div id="exp">
                     <font face="DFKai-sb" size="5">基本資料</font><br><br>
@@ -57,6 +59,7 @@
                             <Button type="primary" class="button button1" @click="putinfo()">完成</Button>
                         </router-link>
                     </div>
+                    </br>
                 </div>
             </Content>
             <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
@@ -230,6 +233,12 @@ border-radius: 5px; }
     position: relative;
     top: 5px;
     left: 20px;
+}
+.layout-header{
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index:10;
 }
 #exp{
     text-align: center;
