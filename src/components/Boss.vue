@@ -59,13 +59,12 @@
                     <strong>{{ row.cPos}}</strong>
                   </template>
                   <template slot-scope="{ row, index }" slot="see">
-                    <Button type="primary" size="small" style="margin-right: 5px">檢視</Button>
-                    <Button type="warning" size="small" style="margin-right: 5px">修改</Button>
+                    <Button type="primary" size="small" style="margin-right: 5px">修改</Button>
                   </template>
                 </Table>
               </Col>
               <Col span="19">
-                <Table border :columns="HEAD" :data="jobseeker">
+                <Table  size="large" border :columns="HEAD" :data="jobseeker">
                   <template slot-scope="{ row, index }" slot="sName">
                     <strong>{{ row.sName}}</strong>
                   </template>
@@ -110,7 +109,6 @@ export default {
         {
           title: " ",
           slot: "see",
-          width: 150,
           align: "center"
         }
       ],
@@ -154,6 +152,7 @@ export default {
   },
   methods: {
     del(row) {
+      alert(row)
       const axios = require("axios");
       axios
         .delete("http://163.13.226.86:23760/api/Jobseeker/" + row)
