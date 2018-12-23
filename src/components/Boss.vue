@@ -59,14 +59,16 @@
                     <strong>{{ row.cPos}}</strong>
                   </template>
                   <template slot-scope="{ row, index }" slot="see">
-                    <Button type="primary" size="small" style="margin-right: 5px">修改</Button>
+                    <router-link :to="{name:'JOB',params:{id: row.id}}">
+                      <Button type="primary" size="small" style="margin-right: 5px" @click="view(index)">檢視</Button>
+                    </router-link>
                   </template>
                 </Table>
               </Col>
               <Col span="19">
                 <Table  size="large" border :columns="HEAD" :data="jobseeker">
-                  <template slot-scope="{ row, index }" slot="sName">
-                    <strong>{{ row.sName}}</strong>
+                  <template slot-scope="{ row, index }" slot="cPos">
+                    <strong>{{ row.cPos}}</strong>
                   </template>
                   <template slot-scope="{ row, index }" slot="sName">
                     <strong>{{ row.sName }}</strong>
@@ -96,6 +98,8 @@
   </div>
 </template>
 <script>
+ import axios from 'axios'
+  
 export default {
   data() {
     return {
@@ -135,54 +139,59 @@ export default {
     };
   },
   mounted() {
-    var self = this;
-    const axios = require("axios");
-    axios
-      .get("http://163.13.226.86:23760/api/Jobseeker")
-      .then(function(response) {
-        if (response.data["status"] == "success") {
-          self.jobseeker = response.data["results"];
-
-          self.addjob();
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+      let _this=this;
+      _this.getjob();
+      _this.getseeker();
   },
+  
   methods: {
-    del(row) {
-      alert(row)
-      const axios = require("axios");
-      axios
-        .delete("http://163.13.226.86:23760/api/Jobseeker/" + row)
-        .then(response => {
-          this.jobseeker.splice(row, row + 1);
-        });
-      console.log(error);
-    },
-    addjob() {
-      const Vue = require("Vue");
-      const self = this;
-      const axios = require("axios");
-      axios
-        .get("http://163.13.226.86:23760/api/Job")
-        .then(function(response) {
-          if (response.data["status"] == "success") {
-            self.jobs = response.data["results"];
-            for (var i = 0; i < self.jobs.length; i++) {
-              for (var j = 0; j < self.jobseeker.length; j++) {
-                if (self.jobseeker[j]["JobID"] == self.jobs[i]["id"]) {
-                  self.jobseeker[j]["cPos"] = self.jobs[i]["cPos"];
-                }
+      getjob(){
+          let _this=this;
+          axios
+            .get('http://163.13.226.86:23760/api/Job')
+            .then(response => (this.info = response)) 
+            .then(function(response){
+              _this.jobs = response.data["results"];    
+             })
+            .catch(function (error){
+            // alert(error);
+              console.log(error);
+            })
+          },
+      
+      getseeker(){
+        let _this=this;
+          axios
+            .get('http://163.13.226.86:23760/api/Jobseeker')
+            .then(response => (this.info = response)) 
+            .then(function(response){
+              _this.jobseeker = response.data["results"]
+            for (var i = 0; i < _this.jobseeker.length; i++) {
+              for (var j = 0; j < _this.jobs.length; j++) {
+                  if (_this.jobseeker[j]["JobID"] == _this.jobs[i]["id"]) {
+                    _this.jobseeker[j]["cPos"] = _this.jobs[i]["cPos"];
+                  }
+                } 
               }
-            }
-          }
+             })
+            .catch(function (error){
+            // alert(error);
+              console.log(error);
+            })
+      },
+      del(jobseekerid) {
+        let _this=this;
+        // alert(jobseekerid)
+        axios
+        .delete("http://163.13.226.86:23760/api/Jobseeker/" + jobseekerid)
+        .then(response => {
+           _this.jobseeker.splice(jobseekerid-1, 1);
         })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
+        .catch(function (error){
+            // alert(error);
+              console.log(error);
+            })
+      },
   }
-};
+}
 </script>
