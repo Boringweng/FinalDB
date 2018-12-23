@@ -126,12 +126,11 @@ input {
               <br>
               <br>
               <div id="button_check">
-                <router-link to="Boss">
-                  <Button type="primary" class="button button1">取消</Button>
-                </router-link>
                 <router-link to="/Boss">
-                  <Button type="primary" class="button button1" @click="putwork()">完成</Button>
+                  <Button type="primary" class="button button1">返回</Button>
                 </router-link>
+                <Button type="primary" class="button button1" @click="del()">刪除</Button>
+                <Button type="primary" class="button button1" @click="putwork()">修改</Button>
               </div>
             </div>
           </Content>
@@ -142,65 +141,91 @@ input {
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      lines: [],
-      Salary: null,
-      cPos: null,
-      cNeededSkill: [],
-      pos: [
-        {
-          value: "前端工程師",
-          label: "前端工程師"
-        },
-        {
-          value: "後端工程師",
-          label: "後端工程師"
-        },
-        {
-          value: "資訊安全",
-          label: "資訊安全"
-        },
-        {
-          value: "資料庫管理",
-          label: "資料庫管理"
-        }
-      ],
-      Skill: [
-        {
-          value: "C++",
-          label: "C++"
-        },
-        {
-          value: "Javascript",
-          label: "Javascript"
-        },
-        {
-          value: "Html",
-          label: "Html"
-        },
-        {
-          value: "Python",
-          label: "Python"
-        },
-        {
-          value:"Nodejs",
-          label:"Nodejs"
-        },
-        {
-          value:"C#",
-          label:"C#"
-        }
-      ],
-      cPos: ""
-    };
+        Jobid:this.$route.params.id,
+        jobs: [],
+        Salary: null,
+        cPos: null,
+        cNeededSkill: [],
+        pos: [
+            {
+            value: "前端工程師",
+            label: "前端工程師"
+            },
+            {
+            value: "後端工程師",
+            label: "後端工程師"
+            },
+            {
+            value: "資訊安全",
+            label: "資訊安全"
+            },
+            {
+            value: "資料庫管理",
+            label: "資料庫管理"
+            }
+        ],
+        Skill: [
+            {
+            value: "C++",
+            label: "C++"
+            },
+            {
+            value: "Javascript",
+            label: "Javascript"
+            },
+            {
+            value: "Html",
+            label: "Html"
+            },
+            {
+            value: "Python",
+            label: "Python"
+            },
+            {
+            value:"Nodejs",
+            label:"Nodejs"
+            },
+            {
+            value:"C#",
+            label:"C#"
+            }
+        ],
+        cPos: ""
+        };
+  },
+   created() {
+      let _this=this
+    //   alert(_this.Jobid)
+         _this.getjob(_this.Jobid)
+  },
+  mounted () {
+      this.addbox()
   },
   methods: {
+    getjob(Jobid){
+          let _this=this;
+          axios
+            .get('http://163.13.226.86:23760/api/Job/'+Jobid)
+            .then(response => (this.info = response)) 
+            .then(function(response){
+                _this.jobs = response.data["results"];
+                // console.log(_this.jobs.cNeededSkill)  
+                _this.Salary=_this.jobs.Salary;
+                _this.cPos=_this.jobs.cPos;
+                _this.cNeededSkill=_this.jobs.cNeededSkill;
+             })
+            .catch(function (error){
+            // alert(error);
+              console.log(error);
+            })
+    },
     putwork() {
-      const axios = require('axios');
-      axios.post(
-        "http://163.13.226.86:23760/api/Job",
+      let _this=this;
+      axios.put("http://163.13.226.86:23760/api/Job/"+_this.Jobid,
         {
           "Salary" : this.Salary,
           "cPos" : this.cPos,
@@ -209,12 +234,11 @@ export default {
         {
           headers: {
             "Content-Type": "application/json"
-            
-
           }
         }
       )
       .then(function(response) {
+        alert("修改成功")
         console.log(success);
       })
       .catch(function(error) {
@@ -222,16 +246,24 @@ export default {
       });
     },
     addbox(){
-            this.cNeededSkill.push(null)
-            
+            this.cNeededSkill.push(null)     
     },
     delbox(index){
            this.cNeededSkill.splice(index, index + 1) 
-        }
-    },
-
-  mounted () {
-      this.addbox()
+        },
+    del(){
+        let _this=this
+        // alert(_this.Jobid)
+        axios
+        .delete("http://163.13.226.86:23760/api/Job/" + this.Jobid)
+        .then(response => {
+            this.$router.push({ path: '/BOSS' })
+        })
+        .catch(function (error){
+            // alert(error);
+              console.log(error);
+            })
+      },
   }
 };
 </script>
