@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 .layout-nav {
-  width: 500px;
+  width: 700px;
   margin: 0 auto;
   margin-right: 20px;
 }
