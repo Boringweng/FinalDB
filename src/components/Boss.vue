@@ -22,19 +22,25 @@
   position: relative;
   top: 5px;
   left: 20px;
+<<<<<<< HEAD
 }
 .layout-header{
   top: 0px;
   width: 100%;
   position: fixed;
   z-index:10;
+=======
+>>>>>>> peach
 }
 </style>
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
+<<<<<<< HEAD
 
     <div class="layout-header">
+=======
+>>>>>>> peach
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -56,7 +62,10 @@
           </div>
         </Menu>
       </Header>
+<<<<<<< HEAD
       </div></br></br>
+=======
+>>>>>>> peach
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
@@ -68,12 +77,21 @@
                     <strong>{{ row.cPos}}</strong>
                   </template>
                   <template slot-scope="{ row, index }" slot="see">
+<<<<<<< HEAD
                     <Button type="primary" size="small" style="margin-right: 5px">修改</Button>
+=======
+                    <Button type="primary" size="small" style="margin-right: 5px">檢視</Button>
+                    <Button type="warning" size="small" style="margin-right: 5px">修改</Button>
+>>>>>>> peach
                   </template>
                 </Table>
               </Col>
               <Col span="19">
+<<<<<<< HEAD
                 <Table  size="large" border :columns="HEAD" :data="jobseeker">
+=======
+                <Table border :columns="HEAD" :data="jobseeker">
+>>>>>>> peach
                   <template slot-scope="{ row, index }" slot="sName">
                     <strong>{{ row.sName}}</strong>
                   </template>
@@ -118,6 +136,10 @@ export default {
         {
           title: " ",
           slot: "see",
+<<<<<<< HEAD
+=======
+          width: 150,
+>>>>>>> peach
           align: "center"
         }
       ],
@@ -161,7 +183,10 @@ export default {
   },
   methods: {
     del(row) {
+<<<<<<< HEAD
       alert(row)
+=======
+>>>>>>> peach
       const axios = require("axios");
       axios
         .delete("http://163.13.226.86:23760/api/Jobseeker/" + row)
