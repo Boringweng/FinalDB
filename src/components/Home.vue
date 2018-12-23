@@ -38,16 +38,16 @@
           </div>
           <div class="layout-nav">
             <MenuItem name="account">
-              <Input v-model="value1" placeholder="請輸入帳號..."/>
+              <Input v-model="account" type="text" placeholder="請輸入帳號..."/>
             </MenuItem>
             <MenuItem name="password">
-              <Input v-model="value1" placeholder="請輸入密碼..."/>
+              <Input v-model="password" type="password" placeholder="請輸入密碼..."/>
             </MenuItem>
-            <router-link to="Boss">
+            <!-- <router-link to="Boss"> -->
               <MenuItem name="button">
-                <Button type="info">登入</Button>
+                <Button type="info" @click="checkpw()">登入</Button>
               </MenuItem>
-            </router-link>
+            <!-- </router-link> -->
           </div>
         </Menu>
       </Header>
@@ -94,6 +94,8 @@ export default {
   data() {
     return {
       jobs: [],
+      account:null,
+      password:null,
       HEAD: [
         {
           title: "職位名稱",
@@ -129,6 +131,17 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
+  },
+  methods:{
+    checkpw(){
+      if(this.account="admin"&&this.password==9487){
+        this.$router.push({ path: '/BOSS' })  
+      }
+      else
+      {
+        alert("密碼錯誤")
+      }
+    }
   }
 };
 </script>

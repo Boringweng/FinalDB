@@ -69,13 +69,13 @@
                   </template>
                   <template slot-scope="{ row, index }" slot="see">
                     <router-link :to="{name:'JOB',params:{id: row.id}}">
-                      <Button type="primary" size="small" style="margin-right: 5px" @click="view(index)">檢視</Button>
+                      <Button type="primary" size="small" style="margin-right: 5px" @click="view(index)">檢視與修改</Button>
                     </router-link>
                   </template>
                 </Table>
               </Col>
               <Col span="19">
-                <Table  size="large" border :columns="HEAD" :data="jobseeker">
+                <Table   border :columns="HEAD" :data="jobseeker">
                   <template slot-scope="{ row, index }" slot="cPos">
                     <strong>{{ row.cPos}}</strong>
                   </template>
@@ -108,7 +108,6 @@
 </template>
 <script>
  import axios from 'axios'
-  
 export default {
   data() {
     return {
