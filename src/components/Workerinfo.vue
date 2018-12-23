@@ -43,6 +43,11 @@
                 </strong>
         </strong>
         </div>
+        <div style="text-align: center;">
+          <router-link to="/Boss">
+                  <Button type="primary" class="button button1">返回</Button>
+                </router-link>
+        </div>
       </Content>
       <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
     </Layout>
