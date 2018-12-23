@@ -15,6 +15,7 @@
             <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
                 <div id="exp">
                     <font face="DFKai-sb" size="5">基本資料</font><br><br>
+<<<<<<< HEAD
                     <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     <font face="DFKai-sb" size="3"><b>姓名:</b></font> <input v-model="sName" type="text" placeholder="請輸入姓名..."><br><br>
                     <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -41,6 +42,18 @@
                     <font face="DFKai-sb" size="3"><b>學位:</b></font> <input type="text" v-model="Degree" placeholder="請輸入最高學位..."><br><br>
                     <font face="DFKai-sb" size="3"><b>學校:</b></font> <input type="text" v-model="School" placeholder="請輸入其學校..."><br><br>
                     <font face="DFKai-sb" size="3"><b>系所:</b></font> <input type="text" v-model="Department" placeholder="請輸入其系所..."><br><br>
+=======
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>姓名:</b></font> <input type="text" placeholder="請輸入姓名..."><br><br>
+                    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><font face="DFKai-sb" size="3"><b>E-mail:</b></font> <input type="text" placeholder="請輸入E-mail..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>身分證ID:</b></font> <input type="text" placeholder="請輸入身分證ID..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>期望薪水:</b></font> <input type="text" placeholder="請輸入期望薪水..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>專長技能:</b></font> <input type="text" placeholder="請輸入專長技能..."><br><br>
+                    <hr>
+                    <font face="DFKai-sb" size="5">學歷</font><br><br>
+                    <font face="DFKai-sb" size="3"><b>最高學位:</b></font> <input type="text" placeholder="請輸入最高學位..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>畢業學校:</b></font> <input type="text" placeholder="請輸入其學校..."><br><br>
+                    <font face="DFKai-sb" size="3"><b>畢業系所:</b></font> <input type="text" placeholder="請輸入其系所..."><br><br>
+>>>>>>> peach
                     <hr>
                     <font face="DFKai-sb" size="5">工作經驗</font><br><br>
                     <Icon type="md-add" />
@@ -57,6 +70,7 @@
                             <Button type="primary" class="button button1" @click="putinfo()">完成</Button>
                         </router-link>
                     </div>
+                    </br>
                 </div>
             </Content>
             <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>

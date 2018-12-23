@@ -25,6 +25,7 @@
 }
 </style>
 <template>
+<<<<<<< HEAD
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
       <Header>
@@ -91,6 +92,41 @@
             </Row>
           </Content>
           <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
+=======
+    <div class="layout">
+        <Layout :style="{minHeight: '100vh'}">
+            <Header>
+                <Menu mode="horizontal" theme="dark" active-name="1">
+                    <div class="layout-logo">
+                        <font face="DFKai-sb" size="6" style="color:white"><b>求職網</b></font>
+                    </div>
+                    <div class="layout-nav">
+                            <MenuItem name="account">
+                                <router-link to="BossAdd">
+                                    <Icon type="ios-briefcase" style="color:white"/>
+                                    <font face="DFKai-sb" size="3" style="color:white"><b>新增職缺</b></font>
+                                </router-link>
+                            </MenuItem>
+                    </div>
+                </Menu>
+            </Header>
+            <Layout>
+                <Layout :style="{padding: '0 36px 36px'}">
+                    <br>
+                    <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
+                        <Row>
+                            <Col span="5">
+                                 <Table height="200" :columns="jobcolumns" :data="job"></Table>
+                            </Col>
+                            <Col span="19">
+                                <Table border :columns="workercolumns" :data="wocker"></Table>
+                            </Col>
+                        </Row>
+                    </Content>
+                    <Footer class="layout-footer-center">工程師 &copy; 求職網</Footer>
+                </Layout>
+            </Layout>
+>>>>>>> peach
         </Layout>
       </Layout>
     </Layout>

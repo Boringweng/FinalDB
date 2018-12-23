@@ -22,11 +22,24 @@
   position: relative;
   top: 5px;
   left: 20px;
+<<<<<<< HEAD
+=======
+}
+.layout-header{
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index:10;
+>>>>>>> peach
 }
 </style>
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
+<<<<<<< HEAD
+=======
+    <div class="layout-header">
+>>>>>>> peach
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -51,6 +64,11 @@
           </div>
         </Menu>
       </Header>
+<<<<<<< HEAD
+=======
+      </div></br></br>
+
+>>>>>>> peach
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
@@ -98,6 +116,7 @@ export default {
         {
           title: "職位名稱",
           slot: "cPos"
+<<<<<<< HEAD
         },
         {
           title: "薪水待遇",
@@ -108,6 +127,18 @@ export default {
           slot: "cNeededSkill"
         },
         {
+=======
+        },
+        {
+          title: "薪水待遇",
+          slot: "Salary"
+        },
+        {
+          title: "所需技能",
+          slot: "cNeededSkill"
+        },
+        {
+>>>>>>> peach
           title: " ",
           slot: "see",
           width: 150,
