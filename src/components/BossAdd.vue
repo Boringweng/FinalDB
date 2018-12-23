@@ -29,7 +29,6 @@ input {
 .button1:hover {
   background-color: gray;
   color: rgb(0, 0, 0);
-<<<<<<< HEAD
 }
 .layout {
   border: 1px solid #d7dde4;
@@ -60,32 +59,6 @@ input {
   width: 100%;
   position: fixed;
   z-index:10;
-=======
-}
-.layout {
-  border: 1px solid #d7dde4;
-  background: #f5f7f9;
-  position: relative;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.layout-nav {
-  width: 150px;
-  margin: 0 auto;
-  margin-right: 20px;
-}
-.layout-footer-center {
-  text-align: center;
-}
-.layout-logo {
-  width: 100px;
-  height: 30px;
-  border-radius: 3px;
-  float: left;
-  position: relative;
-  top: 5px;
-  left: 20px;
->>>>>>> peach
 }
 #exp {
   text-align: center;
@@ -94,10 +67,7 @@ input {
 <template>
   <div class="layout">
     <Layout style="{minHeight: '100vh'}">
-<<<<<<< HEAD
     <div class="layout-header">
-=======
->>>>>>> peach
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -112,10 +82,7 @@ input {
           </div>
         </Menu>
       </Header>
-<<<<<<< HEAD
       </div>
-=======
->>>>>>> peach
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <Content :style="{margin: '50px 80px ', background: '#fff', minHeight: '600px'}">
