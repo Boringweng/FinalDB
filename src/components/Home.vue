@@ -102,7 +102,7 @@ export default {
           slot: "cPos"
         },
         {
-          title: "薪水待遇",
+          title: "每月薪水",
           slot: "Salary"
         },
         {

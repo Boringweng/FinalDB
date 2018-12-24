@@ -106,7 +106,7 @@ input {
               <br>
               <br>
               <font face="DFKai-sb" size="3">
-                <b>薪水待遇:</b>
+                <b>每月薪水:</b>
               </font>
               <input type="text"  v-model="Salary" placeholder="請輸入薪水待遇...">
               <br>

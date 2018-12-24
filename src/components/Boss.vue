@@ -146,6 +146,11 @@ export default {
       ]
     };
   },
+  created(){
+      let _this=this;
+      _this.getjob();
+      _this.getseeker();
+  },
   mounted() {
       let _this=this;
       _this.getjob();
@@ -174,13 +179,20 @@ export default {
             .then(response => (this.info = response)) 
             .then(function(response){
               _this.jobseeker = response.data["results"]
-            for (var i = 0; i < _this.jobseeker.length; i++) {
-              for (var j = 0; j < _this.jobs.length; j++) {
-                  if (_this.jobseeker[j]["JobID"] == _this.jobs[i]["id"]) {
-                    _this.jobseeker[j]["cPos"] = _this.jobs[i]["cPos"];
+                // alert(_this.jobseeker.length)
+                // alert(_this.jobs.length)
+               
+                for (var i =0; i < _this.jobseeker.length; i++) {
+                  for (var j =0; j < _this.jobs.length; j++) {
+                    // alert("hello")
+                      // console.log(_this.jobseeker[j]["JobID"])
+                      // console.log(_this.jobs[i]["id"])  
+                    if (_this.jobseeker[j]["JobID"] == _this.jobs[i]["id"]) {
+                      // alert("hi")
+                      _this.jobseeker[j]["cPos"] = _this.jobs[i]["cPos"];
+                    }
                   }
-                } 
-              }
+                }             
              })
             .catch(function (error){
             // alert(error);
@@ -192,8 +204,15 @@ export default {
         // alert(jobseekerid)
         axios
         .delete("http://163.13.226.86:23760/api/Jobseeker/" + jobseekerid)
+        axios
+        .delete("http://163.13.226.86:23760/api/CV/" + jobseekerid)
         .then(response => {
+          if(jobseekerid==0){
+            _this.jobseeker.splice(0, 1);
+          }
+          else{
            _this.jobseeker.splice(jobseekerid-1, 1);
+          }
         })
         .catch(function (error){
             // alert(error);
