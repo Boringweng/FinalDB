@@ -187,9 +187,9 @@ export default {
                     // alert("hello")
                       // console.log(_this.jobseeker[j]["JobID"])
                       // console.log(_this.jobs[i]["id"])  
-                    if (_this.jobseeker[j]["JobID"] == _this.jobs[i]["id"]) {
+                    if (_this.jobseeker[i]["JobID"] == _this.jobs[j]["id"]) {
                       // alert("hi")
-                      _this.jobseeker[j]["cPos"] = _this.jobs[i]["cPos"];
+                      _this.jobseeker[i]["cPos"] = _this.jobs[j]["cPos"];
                     }
                   }
                 }             
