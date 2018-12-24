@@ -23,10 +23,17 @@
   top: 5px;
   left: 20px;
 }
+.layout-header{
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index:10;
+}
 </style>
 <template>
   <div class="layout">
     <Layout :style="{minHeight: '100vh'}">
+      <div class="layout-header">
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <div class="layout-logo">
@@ -38,19 +45,20 @@
           </div>
           <div class="layout-nav">
             <MenuItem name="account">
-              <Input v-model="value1" placeholder="請輸入帳號..."/>
+              <Input v-model="account" type="text" placeholder="請輸入帳號..."/>
             </MenuItem>
             <MenuItem name="password">
-              <Input v-model="value1" placeholder="請輸入密碼..."/>
+              <Input v-model="password" type="password" placeholder="請輸入密碼..."/>
             </MenuItem>
-            <router-link to="Boss">
+            <!-- <router-link to="Boss"> -->
               <MenuItem name="button">
-                <Button type="info">登入</Button>
+                <Button type="info" @click="checkpw()">登入</Button>
               </MenuItem>
-            </router-link>
+            <!-- </router-link> -->
           </div>
         </Menu>
       </Header>
+      </div></br></br>
       <Layout>
         <Layout :style="{padding: '0 36px 36px'}">
           <br>
@@ -94,13 +102,15 @@ export default {
   data() {
     return {
       jobs: [],
+      account:null,
+      password:null,
       HEAD: [
         {
           title: "職位名稱",
           slot: "cPos"
         },
         {
-          title: "薪水待遇",
+          title: "每月薪水",
           slot: "Salary"
         },
         {
@@ -129,6 +139,27 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
+  },
+  methods:{
+    checkpw(){
+      if(this.account!='admin')
+      {
+        alert("帳號錯誤")
+      }
+
+      else
+      {
+        if(this.password==9487)
+        {
+          this.$router.push({ path: '/BOSS' })  
+        }
+        else
+        {
+        alert("密碼錯誤")
+        }
+      }
+     
+    }
   }
 };
 </script>
